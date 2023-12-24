@@ -124,6 +124,22 @@ export class BliNeder<T> implements PromiseLike<T> {
 		return new BliNeder<T>((_, reject) => reject(reason));
 	}
 
+	static all<T extends PromiseLike<any>[]>(promises: T) {
+		const results: Awaited<T[number]>[] = [];
+
+		return new BliNeder((resolve) => {
+			promises.forEach((promise, i) => {
+				promise.then((value) => {
+					results[i] = value;
+
+					if (results.length === promises.length) {
+						resolve(results);
+					}
+				});
+			});
+		});
+	}
+
 	private resolveNext() {
 		queueMicrotask(() => {
 			this.resolveCallbacks.forEach((cb) => cb(this.value));

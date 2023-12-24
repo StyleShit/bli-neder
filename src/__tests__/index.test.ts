@@ -311,6 +311,22 @@ describe('BliNeder', () => {
 			expect(value).toBe(12);
 		});
 
+		it('should wait for all PromiseLikes to resolve with the all method', async () => {
+			// Arrange.
+			const promises = [
+				Promise.resolve(1),
+				BliNeder.resolve(2),
+				new Promise((resolve) => resolve(3)),
+				new BliNeder((resolve) => resolve(4)),
+			];
+
+			// Act.
+			const values = await BliNeder.all(promises);
+
+			// Assert.
+			expect(values).toEqual([1, 2, 3, 4]);
+		});
+
 		it('should run the constructor executor synchronously', async () => {
 			// Arrange.
 			let number = 0;
