@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"moduleResolution": "Node",
+		"isolatedModules": true,
+		"strict": true,
+		"allowJs": false,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": false,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"noEmit": true
+	}
+}
