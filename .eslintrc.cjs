@@ -21,4 +21,8 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['@typescript-eslint'],
+	rules: {
+		// We use `any` in some valid cases.
+		'@typescript-eslint/no-explicit-any': 'off',
+	},
 };
