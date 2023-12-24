@@ -86,6 +86,19 @@ describe('BliNeder', () => {
 			return expect(value).toBe(84);
 		});
 
+		it('should catch in catch method', async () => {
+			// Arrange.
+			const neder = new BliNeder<number>((_, reject) => {
+				reject(42);
+			});
+
+			// Act.
+			const value = await neder.catch((value) => value * 2);
+
+			// Assert.
+			return expect(value).toBe(84);
+		});
+
 		it('should await then with resolution', async () => {
 			// Arrange.
 			const neder = new BliNeder<number>((resolve) => {
@@ -156,6 +169,27 @@ describe('BliNeder', () => {
 
 			// Assert.
 			expect(value).toBe(24);
+		});
+
+		it('should support chaining with rejection', async () => {
+			// Arrange.
+			const neder = new BliNeder<number>((resolve) => {
+				setTimeout(() => {
+					resolve(1);
+				}, 100);
+			});
+
+			// Act.
+			const value = await neder
+				.then((value) => value * 2)
+				.then(() => {
+					throw new Error('3');
+				})
+				.catch((reason) => parseInt(reason.message))
+				.then((value) => value * 4);
+
+			// Assert.
+			expect(value).toBe(12);
 		});
 
 		it('should support returning a PromiseLike that resolves', async () => {

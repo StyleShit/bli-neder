@@ -59,7 +59,7 @@ export class BliNeder<T> implements PromiseLike<T> {
 			| ((reason: any) => TResult2 | PromiseLike<TResult2>)
 			| undefined
 			| null,
-	): PromiseLike<TResult1 | TResult2> {
+	): BliNeder<TResult1 | TResult2> {
 		return new BliNeder<TResult1 | TResult2>((resolve, reject) => {
 			const wrappedOnFulfilled = (value: T) => {
 				if (!onFulfilled) {
@@ -90,6 +90,15 @@ export class BliNeder<T> implements PromiseLike<T> {
 			this.resolveCallbacks.push(wrappedOnFulfilled);
 			this.rejectCallbacks.push(wrappedOnRejected);
 		});
+	}
+
+	catch<TResult = never>(
+		onRejected?:
+			| ((reason: any) => TResult | PromiseLike<TResult>)
+			| undefined
+			| null,
+	): PromiseLike<T | TResult> {
+		return this.then(null, onRejected);
 	}
 
 	private resolveNext() {
