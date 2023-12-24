@@ -144,6 +144,7 @@ describe('BliNeder', () => {
 			const onFulfilled = null;
 			const onRejected = null;
 
+			// Assert.
 			expect.assertions(1);
 
 			try {
@@ -229,6 +230,47 @@ describe('BliNeder', () => {
 
 			// Assert.
 			expect(value).toBe(24);
+		});
+
+		it('should run the finally method after resolution without changing the resolve value', async () => {
+			// Arrange.
+			let number = 0;
+
+			// Act.
+			const value = await new BliNeder<number>((resolve) => {
+				resolve(42);
+			}).finally(() => {
+				number = 42;
+
+				return 1;
+			});
+
+			// Assert.
+			expect(number).toBe(42);
+			expect(value).toBe(42);
+		});
+
+		it('should run the finally method after rejection without changing the reject value', async () => {
+			// Arrange.
+			let number = 0;
+
+			// Act & Assert.
+			expect.assertions(2);
+
+			try {
+				await new BliNeder<number>((_, reject) => {
+					reject(42);
+				}).finally(() => {
+					number = 42;
+
+					return 1;
+				});
+			} catch (e) {
+				expect(e).toBe(42);
+			}
+
+			// Assert.
+			expect(number).toBe(42);
 		});
 
 		it('should run the constructor executor synchronously', async () => {

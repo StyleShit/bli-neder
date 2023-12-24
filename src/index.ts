@@ -101,6 +101,19 @@ export class BliNeder<T> implements PromiseLike<T> {
 		return this.then(null, onRejected);
 	}
 
+	finally(onFinally?: (() => void) | undefined | null): PromiseLike<T> {
+		return this.then(
+			(value) => {
+				onFinally?.();
+				return value;
+			},
+			(reason) => {
+				onFinally?.();
+				throw reason;
+			},
+		);
+	}
+
 	private resolveNext() {
 		queueMicrotask(() => {
 			this.resolveCallbacks.forEach((cb) => cb(this.value));
