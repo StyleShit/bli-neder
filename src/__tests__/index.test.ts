@@ -281,6 +281,14 @@ describe('BliNeder', () => {
 			return expect(neder).resolves.toBe(42);
 		});
 
+		it('should reject using a static method', async () => {
+			// Arrange & Act.
+			const neder = BliNeder.reject(42);
+
+			// Assert.
+			return expect(neder).rejects.toBe(42);
+		});
+
 		it('should support chaining after resolving with static method', async () => {
 			// Arrange & Act.
 			const value = await BliNeder.resolve(1)
@@ -290,6 +298,17 @@ describe('BliNeder', () => {
 
 			// Assert.
 			expect(value).toBe(24);
+		});
+
+		it('should support chaining after rejecting with static method', async () => {
+			// Arrange & Act.
+			const value = await BliNeder.reject(1)
+				.then((value) => value * 2)
+				.catch((value) => value * 3)
+				.then((value) => value * 4);
+
+			// Assert.
+			expect(value).toBe(12);
 		});
 
 		it('should run the constructor executor synchronously', async () => {

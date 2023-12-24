@@ -120,6 +120,10 @@ export class BliNeder<T> implements PromiseLike<T> {
 		});
 	}
 
+	static reject<T = never>(reason: T): BliNeder<T> {
+		return new BliNeder<T>((_, reject) => reject(reason));
+	}
+
 	private resolveNext() {
 		queueMicrotask(() => {
 			this.resolveCallbacks.forEach((cb) => cb(this.value));
