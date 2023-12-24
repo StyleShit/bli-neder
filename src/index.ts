@@ -114,6 +114,12 @@ export class BliNeder<T> implements PromiseLike<T> {
 		);
 	}
 
+	static resolve<T>(value: T | PromiseLike<T>): BliNeder<T> {
+		return new BliNeder<T>((resolve) => {
+			resolve(value);
+		});
+	}
+
 	private resolveNext() {
 		queueMicrotask(() => {
 			this.resolveCallbacks.forEach((cb) => cb(this.value));

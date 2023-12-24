@@ -273,6 +273,25 @@ describe('BliNeder', () => {
 			expect(number).toBe(42);
 		});
 
+		it('should resolve using a static method', async () => {
+			// Arrange & Act.
+			const neder = BliNeder.resolve(42);
+
+			// Assert.
+			return expect(neder).resolves.toBe(42);
+		});
+
+		it('should support chaining after resolving with static method', async () => {
+			// Arrange & Act.
+			const value = await BliNeder.resolve(1)
+				.then((value) => value * 2)
+				.then((value) => value * 3)
+				.then((value) => value * 4);
+
+			// Assert.
+			expect(value).toBe(24);
+		});
+
 		it('should run the constructor executor synchronously', async () => {
 			// Arrange.
 			let number = 0;
