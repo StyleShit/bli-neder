@@ -327,6 +327,27 @@ describe('BliNeder', () => {
 			expect(values).toEqual([1, 2, 3, 4]);
 		});
 
+		it('should wait for all PromiseLikes to settle with the allSettled method', async () => {
+			// Arrange.
+			const promises = [
+				Promise.resolve(1),
+				BliNeder.reject('error 1'),
+				new Promise((_, reject) => reject('error 2')),
+				new BliNeder((resolve) => resolve(4)),
+			];
+
+			// Act.
+			const values = await BliNeder.allSettled(promises);
+
+			// Assert.
+			expect(values).toEqual([
+				{ status: 'fulfilled', value: 1 },
+				{ status: 'rejected', reason: 'error 1' },
+				{ status: 'rejected', reason: 'error 2' },
+				{ status: 'fulfilled', value: 4 },
+			]);
+		});
+
 		it('should run the constructor executor synchronously', async () => {
 			// Arrange.
 			let number = 0;

@@ -26,6 +26,7 @@ new BliNeder((resolve, reject) => {
 const resolvedNeder = BliNeder.resolve('Success!');
 const rejectedNeder = BliNeder.reject('Error!');
 const allNeders = BliNeder.all([resolvedNeder, rejectedNeder]);
+const allSettledNeders = BliNeder.allSettled([resolvedNeder, rejectedNeder]);
 
 // Chaining:
 BliNeder.reject('Error!')
@@ -53,3 +54,5 @@ BliNeder.reject('Error!')
 -   `static reject(reason)`
 
 -   `static all(promises)`
+
+-   `static allSettled(promises)`

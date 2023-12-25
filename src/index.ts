@@ -1,4 +1,4 @@
-import { RejectCallback, ResolveCallback } from './types';
+import { RejectCallback, ResolveCallback, Settled } from './types';
 import { isPromiseLike } from './utils';
 
 const PENDING = Symbol('pending');
@@ -136,6 +136,36 @@ export class BliNeder<T> implements PromiseLike<T> {
 						resolve(results);
 					}
 				});
+			});
+		});
+	}
+
+	static allSettled<T extends PromiseLike<any>[]>(
+		promises: T,
+	): BliNeder<Settled<T>[]> {
+		const results: Settled<T>[] = [];
+
+		return new BliNeder((resolve) => {
+			promises.forEach((promise, i) => {
+				const onFulfilled = (value: T) => {
+					results[i] = { status: 'fulfilled', value };
+
+					resolveIfNeeded();
+				};
+
+				const onRejected = (reason: any) => {
+					results[i] = { status: 'rejected', reason };
+
+					resolveIfNeeded();
+				};
+
+				const resolveIfNeeded = () => {
+					if (results.length === promises.length) {
+						resolve(results);
+					}
+				};
+
+				promise.then(onFulfilled, onRejected);
 			});
 		});
 	}
