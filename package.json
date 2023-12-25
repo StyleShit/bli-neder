@@ -1,7 +1,7 @@
 {
 	"name": "bli-neder",
 	"version": "0.1.0",
-	"description": "A jewish implementation of Promise",
+	"description": "A jewish implementation of Promise in TypeScript",
 	"author": "StyleShit",
 	"license": "MIT",
 	"repository": {
