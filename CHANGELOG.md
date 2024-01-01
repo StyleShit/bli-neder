@@ -1,5 +1,11 @@
 # bli-neder
 
+## 0.3.0
+
+### Minor Changes
+
+- d052861: Add `BliNeder.race` method
+
 ## 0.2.0
 
 ### Minor Changes
