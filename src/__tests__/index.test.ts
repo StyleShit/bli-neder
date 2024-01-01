@@ -347,6 +347,33 @@ describe('BliNeder', () => {
 		]);
 	});
 
+	it('should wait for the first PromiseLike to resolve with the race method', async () => {
+		// Arrange.
+		const promises = [
+			new BliNeder((_, reject) => setTimeout(() => reject(1), 200)),
+			new Promise((resolve) => setTimeout(() => resolve(2), 100)),
+			new Promise((resolve) => setTimeout(() => resolve(3), 300)),
+		];
+
+		// Act.
+		const value = await BliNeder.race(promises);
+
+		// Assert.
+		expect(value).toBe(2);
+	});
+
+	it('should wait for the first PromiseLike to reject with the race method', () => {
+		// Arrange.
+		const promises = [
+			new Promise((resolve) => setTimeout(() => resolve(1), 200)),
+			new BliNeder((_, reject) => setTimeout(() => reject(2), 100)),
+			new Promise((resolve) => setTimeout(() => resolve(3), 300)),
+		];
+
+		// Act & Assert.
+		expect(() => BliNeder.race(promises)).rejects.toBe(2);
+	});
+
 	it('should run the constructor executor synchronously', async () => {
 		// Arrange.
 		let number = 0;

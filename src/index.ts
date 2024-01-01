@@ -168,6 +168,16 @@ export class BliNeder<T> implements PromiseLike<T> {
 		});
 	}
 
+	static race<T extends PromiseLike<any>[]>(
+		promises: T,
+	): BliNeder<Settled<T>[]> {
+		return new BliNeder((resolve, reject) => {
+			promises.forEach((promise) => {
+				promise.then(resolve, reject);
+			});
+		});
+	}
+
 	private resolveNext() {
 		queueMicrotask(() => {
 			this.resolveCallbacks.forEach((cb) => cb(this.value));
