@@ -1,5 +1,11 @@
 # bli-neder
 
+## 0.2.0
+
+### Minor Changes
+
+- 94cb6c9: Add `BliNeder.allSettled` method
+
 ## 0.1.0
 
 ### Minor Changes
