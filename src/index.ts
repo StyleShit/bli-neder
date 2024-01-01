@@ -115,9 +115,7 @@ export class BliNeder<T> implements PromiseLike<T> {
 	}
 
 	static resolve<T>(value: T | PromiseLike<T>): BliNeder<T> {
-		return new BliNeder<T>((resolve) => {
-			resolve(value);
-		});
+		return new BliNeder<T>((resolve) => resolve(value));
 	}
 
 	static reject<T = never>(reason: T): BliNeder<T> {
