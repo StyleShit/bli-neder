@@ -31,7 +31,7 @@ const allNeders = BliNeder.all([resolvedNeder, rejectedNeder]);
 
 const allSettledNeders = BliNeder.allSettled([resolvedNeder, rejectedNeder]);
 
-const raceBliNeders = BliNeder.race([resolvedNeder, rejectedNeder]);
+const racedNeders = BliNeder.race([resolvedNeder, rejectedNeder]);
 
 // Chaining:
 BliNeder.reject('Error!')
