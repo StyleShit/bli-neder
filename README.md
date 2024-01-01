@@ -44,18 +44,18 @@ BliNeder.reject('Error!')
 
 ## Available Nethods
 
--   `BliNeder.prototype.then(onFulfilled, onRejected)`
+-   `BliNeder.prototype.then(onFulfilled, onRejected)` - See [`Promise.prototype.then`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) on MDN
 
--   `BliNeder.prototype.catch(onRejected)`
+-   `BliNeder.prototype.catch(onRejected)` - See [`Promise.prototype.catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) on MDN
 
--   `BliNeder.prototype.finally(onFinally)`
+-   `BliNeder.prototype.finally(onFinally)` - See [`Promise.prototype.finally`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally) on MDN
 
--   `BliNeder.resolve(value)`
+-   `BliNeder.resolve(value)` - See [`Promise.resolve`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) on MDN
 
--   `BliNeder.reject(reason)`
+-   `BliNeder.reject(reason)` - See [`Promise.reject`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject) on MDN
 
--   `BliNeder.all(promises)`
+-   `BliNeder.all(promises)` - See [`Promise.all`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) on MDN
 
--   `BliNeder.allSettled(promises)`
+-   `BliNeder.allSettled(promises)` - See [`Promise.allSettled`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled) on MDN
 
--   `BliNeder.race(promises)`
+-   `BliNeder.race(promises)` - See [`Promise.race`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race) on MDN
