@@ -24,9 +24,13 @@ new BliNeder((resolve, reject) => {
 
 // Static methods:
 const resolvedNeder = BliNeder.resolve('Success!');
+
 const rejectedNeder = BliNeder.reject('Error!');
+
 const allNeders = BliNeder.all([resolvedNeder, rejectedNeder]);
+
 const allSettledNeders = BliNeder.allSettled([resolvedNeder, rejectedNeder]);
+
 const raceBliNeders = BliNeder.race([resolvedNeder, rejectedNeder]);
 
 // Chaining:
