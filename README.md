@@ -44,18 +44,18 @@ BliNeder.reject('Error!')
 
 ## Available Nethods
 
--   `then(onFulfilled, onRejected)`
+-   `BliNeder.prototype.then(onFulfilled, onRejected)`
 
--   `catch(onRejected)`
+-   `BliNeder.prototype.catch(onRejected)`
 
--   `finally(onFinally)`
+-   `BliNeder.prototype.finally(onFinally)`
 
--   `static resolve(value)`
+-   `BliNeder.resolve(value)`
 
--   `static reject(reason)`
+-   `BliNeder.reject(reason)`
 
--   `static all(promises)`
+-   `BliNeder.all(promises)`
 
--   `static allSettled(promises)`
+-   `BliNeder.allSettled(promises)`
 
--   `static race(promises)`
+-   `BliNeder.race(promises)`
