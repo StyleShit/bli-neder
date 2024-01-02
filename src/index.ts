@@ -178,6 +178,35 @@ export class BliNeder<T> implements PromiseLike<T> {
 		});
 	}
 
+	static any<T extends PromiseLike<any>>(
+		promises: T[],
+	): BliNeder<Awaited<T> | AggregateError> {
+		if (promises.length === 0) {
+			return BliNeder.reject(
+				new AggregateError(
+					[],
+					'No Promise in BliNeder.any was resolved',
+				),
+			);
+		}
+
+		const rejections: any[] = [];
+
+		return new BliNeder((resolve, reject) => {
+			promises.forEach((promise, i) => {
+				const onRejected = (reason: any) => {
+					rejections[i] = reason;
+
+					if (rejections.length === promises.length) {
+						reject(new AggregateError(rejections));
+					}
+				};
+
+				promise.then(resolve, onRejected);
+			});
+		});
+	}
+
 	private resolveNext() {
 		queueMicrotask(() => {
 			this.resolveCallbacks.forEach((cb) => cb(this.value));

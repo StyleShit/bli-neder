@@ -33,6 +33,8 @@ const allSettledNeders = BliNeder.allSettled([resolvedNeder, rejectedNeder]);
 
 const racedNeders = BliNeder.race([resolvedNeder, rejectedNeder]);
 
+const anyNeders = BliNeder.any([resolvedNeder, rejectedNeder]);
+
 // Chaining:
 BliNeder.reject('Error!')
 	.then((value) => {
@@ -63,3 +65,5 @@ BliNeder.reject('Error!')
 -   `BliNeder.allSettled(promises)` - See [`Promise.allSettled`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled)
 
 -   `BliNeder.race(promises)` - See [`Promise.race`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
+
+-   `BliNeder.any(promises)` - See [`Promise.any`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any)

@@ -374,6 +374,50 @@ describe('BliNeder', () => {
 		expect(() => BliNeder.race(promises)).rejects.toBe(2);
 	});
 
+	it('should wait for the first PromiseLike to resolve with the any method', async () => {
+		// Arrange.
+		const promises = [
+			new Promise((_, reject) => setTimeout(() => reject(1), 100)),
+			new Promise((resolve) => setTimeout(() => resolve(2), 200)),
+			new Promise((resolve) => setTimeout(() => resolve(3), 300)),
+		];
+
+		// Act.
+		const value = await BliNeder.any(promises);
+
+		// Assert.
+		expect(value).toBe(2);
+	});
+
+	it('should wait for all PromiseLikes to reject with the any method', async () => {
+		// Arrange.
+		const promises = [
+			new BliNeder((_, reject) => reject(1)),
+			new Promise((_, reject) => reject(2)),
+			new Promise((_, reject) => reject(3)),
+		];
+
+		// Act & Assert.
+		expect.assertions(2);
+
+		try {
+			await BliNeder.any(promises);
+		} catch (e: any) {
+			expect(e).instanceOf(AggregateError);
+			expect(e.errors).toEqual([1, 2, 3]);
+		}
+	});
+
+	it('should reject if the PromiseLikes array is empty when using the any method', () => {
+		// Act & Assert.
+		expect.assertions(2);
+
+		BliNeder.any([]).catch((e: any) => {
+			expect(e).instanceOf(AggregateError);
+			expect(e.message).toBe('No Promise in BliNeder.any was resolved');
+		});
+	});
+
 	it('should run the constructor executor synchronously', async () => {
 		// Arrange.
 		let number = 0;
