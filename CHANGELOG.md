@@ -1,5 +1,11 @@
 # bli-neder
 
+## 0.4.0
+
+### Minor Changes
+
+- 572ba25: Add `BliNeder.any` method
+
 ## 0.3.0
 
 ### Minor Changes
