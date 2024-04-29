@@ -145,6 +145,10 @@ export class BliNeder<T> implements PromiseLike<T> {
 	static allSettled<T extends PromiseLike<any>[]>(
 		promises: T,
 	): BliNeder<Settled<T>[]> {
+		if (promises.length === 0) {
+			return BliNeder.resolve([]);
+		}
+
 		const results: Settled<T>[] = [];
 
 		return new BliNeder((resolve) => {

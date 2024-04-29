@@ -376,6 +376,14 @@ describe('BliNeder', () => {
 		]);
 	});
 
+	it('should resolve immediately when passing an empty array to the allSettled method', async () => {
+		// Act.
+		const values = await BliNeder.allSettled([]);
+
+		// Assert.
+		expect(values).toEqual([]);
+	});
+
 	it('should wait for the first PromiseLike to resolve with the race method', async () => {
 		// Arrange.
 		const promises = [
