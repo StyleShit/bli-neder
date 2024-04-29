@@ -280,12 +280,33 @@ describe('BliNeder', () => {
 		return expect(neder).resolves.toBe(42);
 	});
 
+	it('should await resolve using a static method', async () => {
+		// Act.
+		const neder = await BliNeder.resolve(42);
+
+		// Assert.
+		expect(neder).toBe(42);
+	});
+
 	it('should reject using a static method', async () => {
 		// Arrange & Act.
 		const neder = BliNeder.reject(42);
 
 		// Assert.
 		return expect(neder).rejects.toBe(42);
+	});
+
+	it('should await reject using a static method', async () => {
+		// Expect.
+		expect.assertions(1);
+
+		// Act.
+		try {
+			await BliNeder.reject(42);
+		} catch (e) {
+			// Assert.
+			expect(e).toBe(42);
+		}
 	});
 
 	it('should support chaining after resolving with static method', async () => {
