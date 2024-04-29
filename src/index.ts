@@ -123,6 +123,10 @@ export class BliNeder<T> implements PromiseLike<T> {
 	}
 
 	static all<T extends PromiseLike<any>[]>(promises: T) {
+		if (promises.length === 0) {
+			return BliNeder.resolve([]);
+		}
+
 		const results: Awaited<T[number]>[] = [];
 
 		return new BliNeder((resolve) => {

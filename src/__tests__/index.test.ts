@@ -347,6 +347,14 @@ describe('BliNeder', () => {
 		expect(values).toEqual([1, 2, 3, 4]);
 	});
 
+	it('should resolve immediately when passing an empty array to the all method', async () => {
+		// Act.
+		const values = await BliNeder.all([]);
+
+		// Assert.
+		expect(values).toEqual([]);
+	});
+
 	it('should wait for all PromiseLikes to settle with the allSettled method', async () => {
 		// Arrange.
 		const promises = [
