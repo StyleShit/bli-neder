@@ -1,5 +1,13 @@
 # bli-neder
 
+## 0.4.1
+
+### Patch Changes
+
+- 89b8b48: Fix `BliNeder.all` method doesn't resolve when passing an empty promises array
+- 3526c2f: Fix `BliNeder.resolve` & `BliNeder.reject` methods are not awaitable
+- 9492b54: Fix `BliNeder.allSettled` method doesn't resolve when passing an empty promises array
+
 ## 0.4.0
 
 ### Minor Changes
