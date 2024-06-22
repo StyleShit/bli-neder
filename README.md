@@ -48,7 +48,7 @@ BliNeder.reject('Error!')
 	});
 ```
 
-## Available Nethods
+## Available Methods
 
 -   `BliNeder.prototype.then(onFulfilled, onRejected)` - See [`Promise.prototype.then`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
 
